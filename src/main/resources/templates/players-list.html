@@ -1,0 +1,46 @@
+<!-- src/main/resources/templates/players-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MLB Roster</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>MLB Roster</h1>
+    <a href="/players/add" class="button add">➕ Add Player</a>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Team Level</th>
+            <th>Primary Position</th>
+            <th>Overall</th>
+            <th>Age</th>
+            <th>Contract Years Left</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="player : ${players}">
+            <td th:text="${player.name}"></td>
+            <td th:text="${player.teamLevel}"></td>
+            <td th:text="${player.primaryPosition}"></td>
+            <td th:text="${player.currentOverall}"></td>
+            <td th:text="${player.age}"></td>
+            <td th:text="${player.contractYearsLeft}"></td>
+            <td>
+                <a th:href="@{/players/edit/{id}(id=${player.id})}" class="button edit">✏️ Edit</a>
+                <a th:href="@{/players/delete/{id}(id=${player.id})}" class="button delete" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<form method="get" action="/players">
+    <input type="text" name="search" placeholder="Search by name..." class="search-bar">
+    <button type="submit" class="button search">🔍 Search</button>
+</form>
+</body>
+</html>

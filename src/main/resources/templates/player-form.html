@@ -1,0 +1,45 @@
+<!-- src/main/resources/templates/player-form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Player</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="form-container">
+    <h1 th:text="${player.id == null ? 'Add Player' : 'Edit Player'}"></h1>
+    <form th:action="@{/players/save}" th:object="${player}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" required>
+
+        <label>Team Level:</label>
+        <select th:field="*{teamLevel}">
+            <option value="MLB">MLB</option>
+            <option value="AAA">AAA</option>
+            <option value="AA">AA</option>
+            <option value="A">A</option>
+        </select>
+
+        <label>Primary Position:</label>
+        <input type="text" th:field="*{primaryPosition}" required>
+
+        <label>Original Overall:</label>
+        <input type="number" th:field="*{originalOverall}" required>
+
+        <label>Current Overall:</label>
+        <input type="number" th:field="*{currentOverall}" required>
+
+        <label>Age:</label>
+        <input type="number" th:field="*{age}" required>
+
+        <label>Contract Years Left:</label>
+        <input type="number" th:field="*{contractYearsLeft}" required>
+
+        <button type="submit" class="button submit">Save Player</button>
+    </form>
+    <a href="/players" class="button back">Back to List</a>
+</div>
+</body>
+</html>
